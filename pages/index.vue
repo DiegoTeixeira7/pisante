@@ -1,11 +1,9 @@
 <template>
   <div>
-    <h1 class="tw-text-3xl tw-font-bold tw-underline">Hello world!</h1>
+    <h1 class="tw-mt-8 tw-text-3xl tw-font-bold tw-underline">Hello world!</h1>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'IndexPage',
-}
+export default {}
 </script>
