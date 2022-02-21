@@ -16,26 +16,24 @@
           </div>
           <!-- Right Navbar items -->
           <div class="tw-hidden md:tw-flex tw-items-center tw-space-x-3">
-            <button class="tw-ml-2 tw-px-2 btn background-hover">
+            <a href="/login" class="tw-ml-2 tw-px-2 btn background-hover">
               <span
-                href="#"
                 class="
                   text-body-medium text-body-medium
                   tw-text-black-light tw-ml-2
                 "
                 >Login</span
               >
-            </button>
-            <button class="tw-ml-2 tw-px-2 btn background-hover">
+            </a>
+            <a class="tw-ml-2 tw-px-2 btn background-hover" href="/register">
               <span
-                href="/register"
                 class="
                   text-body-medium text-body-medium
                   tw-text-black-light tw-ml-2
                 "
                 >Registrar</span
               >
-            </button>
+            </a>
           </div>
         </div>
         <div class="lg:tw-hidden tw-flex tw-justify-between navbar-mobile-one">
@@ -130,7 +128,7 @@
       </div>
       <nav>
         <div class="tw-flex tw-flex-col tw-justify-start">
-          <button class="btn-2 background-hover">
+          <a href="/login" class="btn-2 background-hover">
             <span
               href="#"
               class="
@@ -139,20 +137,21 @@
               "
               >Login</span
             >
-          </button>
-          <button class="btn-2 background-hover tw-mt-2">
+          </a>
+          <a href="/register" class="btn-2 background-hover tw-mt-2">
             <span
-              href="/register"
               class="
                 text-body-medium text-body-medium
                 tw-text-black-light tw-ml-2
               "
               >Registrar</span
             >
-          </button>
+          </a>
         </div>
       </nav>
     </div>
+
+    <Nuxt />
   </div>
 </template>
 
