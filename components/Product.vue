@@ -68,12 +68,6 @@
       </v-card-text>
 
       <v-divider class="mx-4"></v-divider>
-
-      <!-- <v-card-actions>
-        <v-btn color="deep-purple lighten-2" text>
-          Adicionar no carrinho
-        </v-btn>
-      </v-card-actions> -->
     </v-card>
   </nuxt-link>
 </template>

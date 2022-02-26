@@ -1,8 +1,10 @@
 <template>
   <div
     class="
-      tw-w-full tw-m-4 tw-flex tw-flex-col
-      lg:tw-flex-row
+      tw-w-full
+      lg:tw-ml-8
+      tw-mt-4 tw-flex
+      w-flex-row
       tw-justify-items-center
     "
   >
@@ -111,6 +113,16 @@
           </v-radio>
         </v-radio-group>
       </div>
+      <div class="tw-mt-2">
+        <p>{{ 'Quantidade' }}</p>
+        <v-text-field
+          v-model="selectedAmount"
+          type="number"
+          required
+          min="0"
+          max="10"
+        ></v-text-field>
+      </div>
     </div>
   </div>
 </template>
@@ -152,6 +164,7 @@ export default {
     },
     selectedSize: null,
     selectedColor: null,
+    selectedAmount: 1,
   }),
 }
 </script>
