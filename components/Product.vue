@@ -9,10 +9,7 @@
         ></v-progress-linear>
       </template>
 
-      <v-img
-        height="250"
-        src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-      ></v-img>
+      <img height="250" src="~/assets/images/tenis-nike.jpg" />
 
       <v-card-title>{{ item.title ? item.title : '' }}</v-card-title>
 
