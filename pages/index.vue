@@ -35,12 +35,8 @@ export default {
           }
           data[i].page = j
         }
-
-        console.log(data)
       })
-      .catch((err) => {
-        console.log(err)
-      })
+      .catch()
     return { page, items: data }
   },
   computed: {
