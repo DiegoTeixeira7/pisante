@@ -19,171 +19,30 @@
 
 <script>
 export default {
-  data: () => ({
-    page: 1,
-    items: [
-      {
-        title: 'Produto 1',
-        slug: '/produto-1',
-        price: 122.33,
-        availableQuantity: 10,
-        page: 1,
-        model: {
-          brand: 'Nike',
-          material: 'Couro',
-          intendedAudience: 'Masculino',
-          closure: 'Cadarço',
-          isShockAbsorbers: true,
-          isAntiOdourInsole: true,
-          inventory: [
-            {
-              quantity: 4,
-              size: 38,
-              color: 'Azul',
-            },
-            {
-              quantity: 4,
-              size: 39,
-              color: 'Preto',
-            },
-            {
-              quantity: 2,
-              size: 40,
-              color: 'Branco',
-            },
-          ],
-        },
-      },
-      {
-        title: 'Produto 2',
-        slug: '/produto-2',
-        price: 162.33,
-        availableQuantity: 10,
-        page: 1,
-        model: {
-          brand: 'Nike',
-          material: 'Couro',
-          intendedAudience: 'Masculino',
-          closure: 'Cadarço',
-          isShockAbsorbers: true,
-          isAntiOdourInsole: true,
-          inventory: [
-            {
-              quantity: 4,
-              size: 38,
-              color: 'Azul',
-            },
-            {
-              quantity: 4,
-              size: 39,
-              color: 'Preto',
-            },
-            {
-              quantity: 2,
-              size: 40,
-              color: 'Branco',
-            },
-          ],
-        },
-      },
-      {
-        title: 'Produto 3',
-        slug: '/produto-3',
-        price: 112.13,
-        availableQuantity: 10,
-        page: 1,
-        model: {
-          brand: 'Nike',
-          material: 'Couro',
-          intendedAudience: 'Masculino',
-          closure: 'Cadarço',
-          isShockAbsorbers: true,
-          isAntiOdourInsole: true,
-          inventory: [
-            {
-              quantity: 4,
-              size: 38,
-              color: 'Azul',
-            },
-            {
-              quantity: 4,
-              size: 39,
-              color: 'Preto',
-            },
-            {
-              quantity: 2,
-              size: 40,
-              color: 'Branco',
-            },
-          ],
-        },
-      },
-      {
-        title: 'Produto 4',
-        slug: '/produto-4',
-        price: 195.98,
-        availableQuantity: 10,
-        page: 1,
-        model: {
-          brand: 'Nike',
-          material: 'Couro',
-          intendedAudience: 'Masculino',
-          closure: 'Cadarço',
-          isShockAbsorbers: true,
-          isAntiOdourInsole: true,
-          inventory: [
-            {
-              quantity: 4,
-              size: 38,
-              color: 'Azul',
-            },
-            {
-              quantity: 4,
-              size: 39,
-              color: 'Preto',
-            },
-            {
-              quantity: 2,
-              size: 40,
-              color: 'Branco',
-            },
-          ],
-        },
-      },
-      {
-        title: 'Produto 5',
-        slug: '/produto-5',
-        price: 195.98,
-        availableQuantity: 10,
-        page: 2,
-        model: {
-          brand: 'Nike',
-          material: 'Couro',
-          intendedAudience: 'Masculino',
-          closure: 'Cadarço',
-          isShockAbsorbers: true,
-          isAntiOdourInsole: true,
-          inventory: [
-            {
-              quantity: 4,
-              size: 38,
-              color: 'Azul',
-            },
-            {
-              quantity: 4,
-              size: 39,
-              color: 'Preto',
-            },
-            {
-              quantity: 2,
-              size: 40,
-              color: 'Branco',
-            },
-          ],
-        },
-      },
-    ],
-  }),
+  async asyncData({ $axios, error }) {
+    const page = 1
+
+    let data = []
+    await $axios
+      .get('/api/public_html/api/product/')
+      .then((res) => {
+        data = res?.data?.data
+        let j = 1
+
+        for (let i = 0; i < data.length; i++) {
+          if (i !== 0 && i % 4 === 0) {
+            j++
+          }
+          data[i].page = j
+        }
+
+        console.log(data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    return { page, items: data }
+  },
   computed: {
     numberPages() {
       const number = Math.ceil(this.items.length / 4)

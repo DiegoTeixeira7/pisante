@@ -19,49 +19,36 @@
         </div>
 
         <div class="tw-mt-2">
-          <span
-            ><b>Marca:</b>
-            {{ item.model && item.model.brand ? item.model.brand : '' }}</span
-          >
+          <span><b>Marca:</b> {{ item && item.brand ? item.brand : '' }}</span>
           <br />
           <span
             ><b>Material:</b>
-            {{
-              item.model && item.model.material ? item.model.material : ''
-            }}</span
+            {{ item && item.material ? item.material : '' }}</span
           >
           <br />
           <span
             ><b>Público:</b>
             {{
-              item.model && item.model.intendedAudience
-                ? item.model.intendedAudience
-                : ''
+              item && item.intended_audience ? item.intended_audience : ''
             }}</span
           >
           <br />
           <span
             ><b>Fechamento:</b>
-            {{
-              item.model && item.model.closure ? item.model.closure : ''
-            }}</span
+            {{ item && item.closure ? item.closure : '' }}</span
           >
           <br />
           <span
             ><b>Amortecedores:</b>
             {{
-              item.model && item.model.isShockAbsorbers
-                ? 'Possui'
-                : 'Não possui'
+              item && item.is_shock_absorbers ? 'Possui' : 'Não possui'
             }}</span
           >
           <br />
           <span
             ><b>Palmilha anti-odor:</b>
             {{
-              item.model && item.model.isAntiOdourInsole
-                ? 'Possui'
-                : 'Não possui'
+              item && item.is_anti_odour_insole ? 'Possui' : 'Não possui'
             }}</span
           >
         </div>
