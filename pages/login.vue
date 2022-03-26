@@ -15,35 +15,70 @@
     </div>
 
     <div>
-      <form>
-        <v-layout column>
-          <v-flex>
-            <v-text-field
-              id="email"
-              name="email"
-              label="Email"
-              type="email"
-              required
-            ></v-text-field>
-          </v-flex>
-          <v-flex>
-            <v-text-field
-              id="password"
-              name="password"
-              label="Senha"
-              type="password"
-              required
-            ></v-text-field>
-          </v-flex>
-          <v-flex class="text-xs-center" mt-5>
-            <v-btn type="submit">Entrar</v-btn>
-          </v-flex>
-        </v-layout>
-      </form>
+      <v-layout column>
+        <v-flex>
+          <v-text-field
+            v-model="email"
+            name="email"
+            label="Email"
+            type="email"
+            required
+          ></v-text-field>
+        </v-flex>
+        <v-flex>
+          <v-text-field
+            v-model="password"
+            name="password"
+            label="Senha"
+            type="password"
+            required
+          ></v-text-field>
+        </v-flex>
+        <v-flex class="text-xs-center" mt-5>
+          <v-btn @click="login">Entrar</v-btn>
+        </v-flex>
+      </v-layout>
     </div>
   </v-container>
 </template>
 
 <script>
-export default {}
+export default {
+  data: () => ({
+    email: '',
+    password: '',
+    cpf: '',
+  }),
+  methods: {
+    async login() {
+      const data = {
+        email: this.email,
+        password: this.password,
+        cpf: '',
+        id: '',
+      }
+
+      const formData = new FormData()
+
+      for (const key in data) {
+        formData.append(key, data[key])
+      }
+
+      await this.$axios
+        .post('/api/public_html/api/user/', formData)
+        .then((res) => {
+          const data =
+            res.data && res.data.data && res.data.data.length > 0
+              ? res.data.data[0]
+              : null
+
+          if (data && data.id) {
+            // TODO: adicionar no localstoreage
+            this.$router.push('/')
+          }
+        })
+        .catch()
+    },
+  },
+}
 </script>
