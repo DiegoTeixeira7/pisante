@@ -29,48 +29,37 @@
 
           <div class="tw-mt-2">
             <span
-              ><b>Marca:</b>
-              {{ item.model && item.model.brand ? item.model.brand : '' }}</span
+              ><b>Marca:</b> {{ item && item.brand ? item.brand : '' }}</span
             >
             <br />
             <span
               ><b>Material:</b>
-              {{
-                item.model && item.model.material ? item.model.material : ''
-              }}</span
+              {{ item && item.material ? item.material : '' }}</span
             >
             <br />
             <span
               ><b>Público:</b>
               {{
-                item.model && item.model.intendedAudience
-                  ? item.model.intendedAudience
-                  : ''
+                item && item.intended_audience ? item.intended_audience : ''
               }}</span
             >
             <br />
             <span
               ><b>Fechamento:</b>
-              {{
-                item.model && item.model.closure ? item.model.closure : ''
-              }}</span
+              {{ item && item.closure ? item.closure : '' }}</span
             >
             <br />
             <span
               ><b>Amortecedores:</b>
               {{
-                item.model && item.model.isShockAbsorbers
-                  ? 'Possui'
-                  : 'Não possui'
+                item && item.is_shock_absorbers ? 'Possui' : 'Não possui'
               }}</span
             >
             <br />
             <span
               ><b>Palmilha anti-odor:</b>
               {{
-                item.model && item.model.isAntiOdourInsole
-                  ? 'Possui'
-                  : 'Não possui'
+                item && item.is_anti_odour_insole ? 'Possui' : 'Não possui'
               }}</span
             >
           </div>
@@ -90,9 +79,9 @@
 
       <div class="tw-mt-2">
         <p>{{ 'Tamanho' }}</p>
-        <v-radio-group v-model="selectedSize" row>
+        <v-radio-group v="selectedSize" row>
           <v-radio
-            v-for="(inventory, index) in item.model.inventory"
+            v-for="(inventory, index) in item.inventory"
             :key="index"
             :label="inventory.size"
             :value="index"
@@ -103,9 +92,9 @@
 
       <div class="tw-mt-2">
         <p>{{ 'Cor' }}</p>
-        <v-radio-group v-model="selectedColor" row>
+        <v-radio-group v="selectedColor" row>
           <v-radio
-            v-for="(inventory, index) in item.model.inventory"
+            v-for="(inventory, index) in item.inventory"
             :key="index"
             :label="inventory.color"
             :value="index"
@@ -116,7 +105,7 @@
       <div class="tw-mt-2">
         <p>{{ 'Quantidade' }}</p>
         <v-text-field
-          v-model="selectedAmount"
+          v="selectedAmount"
           type="number"
           required
           min="0"
@@ -129,39 +118,39 @@
 
 <script>
 export default {
-  data: () => ({
-    item: {
-      title: 'Produto 1',
-      slug: '/produto-1',
-      price: 122.33,
-      availableQuantity: 10,
-      page: 1,
-      model: {
-        brand: 'Nike',
-        material: 'Couro',
-        intendedAudience: 'Masculino',
-        closure: 'Cadarço',
-        isShockAbsorbers: true,
-        isAntiOdourInsole: true,
-        inventory: [
-          {
-            quantity: 4,
-            size: 38,
-            color: 'Azul',
-          },
-          {
-            quantity: 4,
-            size: 39,
-            color: 'Preto',
-          },
-          {
-            quantity: 2,
-            size: 40,
-            color: 'Branco',
-          },
-        ],
+  async asyncData({ $axios, params }) {
+    const productId = params.product
+    let item = {}
+
+    const inventory = [
+      {
+        quantity: 4,
+        size: 38,
+        color: 'Azul',
       },
-    },
+      {
+        quantity: 4,
+        size: 39,
+        color: 'Preto',
+      },
+      {
+        quantity: 2,
+        size: 40,
+        color: 'Branco',
+      },
+    ]
+
+    await $axios
+      .get(`/api/public_html/api/product/${productId}`)
+      .then((res) => {
+        item = res?.data?.data[0]
+        item.inventory = inventory
+      })
+      .catch()
+
+    return { item }
+  },
+  data: () => ({
     selectedSize: null,
     selectedColor: null,
     selectedAmount: 1,
