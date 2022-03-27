@@ -228,7 +228,15 @@ export default {
 
           if (data && data.id) {
             localStorage.setItem('user', JSON.stringify(data))
-            this.$router.push('/')
+            this.$router.push(
+              {
+                path: '/',
+                force: true,
+              },
+              () => {
+                this.$router.app.refresh()
+              }
+            )
           }
         })
         .catch()

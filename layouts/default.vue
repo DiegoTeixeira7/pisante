@@ -15,7 +15,10 @@
             </a>
           </div>
           <!-- Right Navbar items -->
-          <div class="tw-hidden md:tw-flex tw-items-center tw-space-x-3">
+          <div
+            v-if="!isUser"
+            class="tw-hidden md:tw-flex tw-items-center tw-space-x-3"
+          >
             <a href="/login" class="tw-ml-2 tw-px-2 btn background-hover">
               <span
                 class="
@@ -35,7 +38,45 @@
               >
             </a>
           </div>
+          <div
+            v-if="isUser && !isAdmin"
+            class="tw-hidden md:tw-flex tw-items-center tw-space-x-3"
+          >
+            <a href="/carrinho" class="tw-ml-2 tw-px-2 btn background-hover">
+              <span
+                class="
+                  text-body-medium text-body-medium
+                  tw-text-black-light tw-ml-2
+                "
+                >Carrinho</span
+              >
+            </a>
+          </div>
+          <div
+            v-if="isUser && isAdmin"
+            class="tw-hidden md:tw-flex tw-items-center tw-space-x-3"
+          >
+            <a href="/pedidos" class="tw-ml-2 tw-px-2 btn background-hover">
+              <span
+                class="
+                  text-body-medium text-body-medium
+                  tw-text-black-light tw-ml-2
+                "
+                >Pedidos</span
+              >
+            </a>
+            <a class="tw-ml-2 tw-px-2 btn background-hover" href="/usuarios">
+              <span
+                class="
+                  text-body-medium text-body-medium
+                  tw-text-black-light tw-ml-2
+                "
+                >Usuários</span
+              >
+            </a>
+          </div>
         </div>
+
         <div class="lg:tw-hidden tw-flex tw-justify-between navbar-mobile-one">
           <!-- Mobile menu button -->
           <div class="tw-flex tw-items-center">
@@ -127,7 +168,7 @@
         </button>
       </div>
       <nav>
-        <div class="tw-flex tw-flex-col tw-justify-start">
+        <div v-if="!isUser" class="tw-flex tw-flex-col tw-justify-start">
           <a href="/login" class="btn-2 background-hover">
             <span
               href="#"
@@ -148,6 +189,45 @@
             >
           </a>
         </div>
+        <div
+          v-if="isUser && !isAdmin"
+          class="tw-flex tw-flex-col tw-justify-start"
+        >
+          <a href="/carrinho" class="btn-2 background-hover">
+            <span
+              href="#"
+              class="
+                text-body-medium text-body-medium
+                tw-text-black-light tw-ml-2
+              "
+              >Carrinho</span
+            >
+          </a>
+        </div>
+        <div
+          v-if="isUser && isAdmin"
+          class="tw-flex tw-flex-col tw-justify-start"
+        >
+          <a href="/pedidos" class="btn-2 background-hover">
+            <span
+              href="#"
+              class="
+                text-body-medium text-body-medium
+                tw-text-black-light tw-ml-2
+              "
+              >Pedidos</span
+            >
+          </a>
+          <a href="/usuarios" class="btn-2 background-hover tw-mt-2">
+            <span
+              class="
+                text-body-medium text-body-medium
+                tw-text-black-light tw-ml-2
+              "
+              >Usuários</span
+            >
+          </a>
+        </div>
       </nav>
     </div>
 
@@ -158,8 +238,20 @@
 <script>
 export default {
   name: 'NavbarPage',
-  data() {
-    return {}
+  data: () => ({
+    isUser: false,
+    isAdmin: false,
+  }),
+  mounted() {
+    const user = JSON.parse(localStorage.getItem('user'))
+
+    if (user && Object.keys(user)?.length > 0) {
+      this.isUser = true
+
+      if (user.role === 'admin') {
+        this.isAdmin = true
+      }
+    }
   },
   methods: {
     showSecondNavbar() {
