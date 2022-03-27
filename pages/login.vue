@@ -73,7 +73,7 @@ export default {
               : null
 
           if (data && data.id) {
-            // TODO: adicionar no localstoreage
+            localStorage.setItem('user', JSON.stringify(data))
             this.$router.push('/')
           }
         })
