@@ -17,7 +17,9 @@
     </div>
 
     <div class="tw-mt-4 lg:tw-ml-10 tw-flex tw-flex-justify-items-center">
-      <v-btn color="deep-purple lighten-2" text> Finalizar pedido </v-btn>
+      <v-btn color="deep-purple lighten-2" text @click="finishOrder">
+        Finalizar pedido
+      </v-btn>
     </div>
   </div>
 </template>
@@ -37,6 +39,66 @@ export default {
     this.address = localStorage.getItem('user')
       ? JSON.parse(localStorage.getItem('user'))
       : {}
+  },
+  methods: {
+    async finishOrder() {
+      let total = 0
+      let products = ''
+      let date = new Date()
+      const hour = date.getHours()
+      date = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDay()
+
+      for (const item of this.items) {
+        total += item.price * item.amount
+        products += item.id + ','
+      }
+
+      products = products.substring(0, products.length - 1)
+
+      const order = {
+        total,
+        products,
+        date,
+        hour,
+        id_user: parseInt(this.address.id),
+        street: this.address.street,
+        city: this.address.city,
+        state: this.address.state,
+        cep: this.address.cep,
+        country: this.address.country,
+        number: this.address.number,
+        neighborhood: this.address.neighborhood,
+      }
+
+      const formData = new FormData()
+
+      for (const key in order) {
+        formData.append(key, order[key])
+      }
+
+      await this.$axios
+        .post('/api/public_html/api/order/', formData)
+        .then((res) => {
+          const data =
+            res.data && res.data.data && res.data.data.length > 0
+              ? res.data.data[0]
+              : null
+
+          if (data && data.id) {
+            localStorage.setItem('cart', JSON.stringify([]))
+            this.$router.push(
+              {
+                path: '/',
+                force: true,
+              },
+              () => {
+                this.$router.app.refresh()
+              }
+            )
+          }
+        })
+        .catch()
+    },
   },
 }
 </script>
