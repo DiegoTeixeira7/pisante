@@ -68,7 +68,7 @@
         <v-divider class="mx-4"></v-divider>
 
         <v-card-actions>
-          <v-btn color="deep-purple lighten-2" text>
+          <v-btn color="deep-purple lighten-2" text @click="addCart(item)">
             Adicionar no carrinho
           </v-btn>
         </v-card-actions>
@@ -79,7 +79,7 @@
 
       <div class="tw-mt-2">
         <p>{{ 'Tamanho' }}</p>
-        <v-radio-group v="selectedSize" row>
+        <v-radio-group v-model="selectedSize" row>
           <v-radio
             v-for="(inventory, index) in item.inventory"
             :key="index"
@@ -92,7 +92,7 @@
 
       <div class="tw-mt-2">
         <p>{{ 'Cor' }}</p>
-        <v-radio-group v="selectedColor" row>
+        <v-radio-group v-model="selectedColor" row>
           <v-radio
             v-for="(inventory, index) in item.inventory"
             :key="index"
@@ -105,7 +105,7 @@
       <div class="tw-mt-2">
         <p>{{ 'Quantidade' }}</p>
         <v-text-field
-          v="selectedAmount"
+          v-model="amount"
           type="number"
           required
           min="0"
@@ -151,10 +151,27 @@ export default {
     return { item }
   },
   data: () => ({
-    selectedSize: null,
-    selectedColor: null,
-    selectedAmount: 1,
+    selectedSize: 0,
+    selectedColor: 0,
+    amount: 1,
   }),
+  methods: {
+    addCart(item) {
+      const size = item.inventory[this.selectedSize].size
+      const color = item.inventory[this.selectedColor].color
+
+      item.size = size
+      item.color = color
+      item.amount = this.amount
+
+      const data = localStorage.getItem('cart')
+        ? JSON.parse(localStorage.getItem('cart'))
+        : []
+
+      data.push(item)
+      localStorage.setItem('cart', JSON.stringify(data))
+    },
+  },
 }
 </script>
 
