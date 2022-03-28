@@ -3,6 +3,24 @@
     <v-list-item>
       <v-list-item-content>
         <v-list-item-subtitle>
+          <span><b>Nome:</b> {{ user.first_name ? user.first_name : '' }}</span>
+          <br />
+          <span
+            ><b>Sobrenome:</b> {{ user.last_name ? user.last_name : '' }}</span
+          >
+          <br />
+          <span><b>Telefone:</b> {{ user.phone ? user.phone : '' }}</span>
+          <br />
+          <span><b>Celular:</b> {{ user.cel ? user.cel : '' }}</span>
+          <br />
+          <span><b>Email:</b> {{ user.email ? user.email : '' }}</span>
+          <br />
+          <span><b>Gênero:</b> {{ user.gender ? user.gender : '' }}</span>
+          <br />
+          <span><b>CPF:</b> {{ user.cpf ? user.cpf : '' }}</span>
+          <br />
+          <span><b>Tipo de usuário:</b> {{ user.role ? user.role : '' }}</span>
+          <br />
           <span><b>Rua:</b> {{ user.street ? user.street : '' }}</span>
           <br />
           <span><b>Número:</b> {{ user.number ? user.number : '' }}</span>
