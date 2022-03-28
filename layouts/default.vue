@@ -51,6 +51,12 @@
                 >Carrinho</span
               >
             </a>
+            <v-btn class="btn-2 background-hover" @click="logout">
+              <span
+                class="text-body-medium text-body-medium tw-text-black-light"
+                >Sair</span
+              >
+            </v-btn>
           </div>
           <div
             v-if="isUser && isAdmin"
@@ -74,6 +80,12 @@
                 >Usuários</span
               >
             </a>
+            <v-btn class="btn-2 background-hover" @click="logout">
+              <span
+                class="text-body-medium text-body-medium tw-text-black-light"
+                >Sair</span
+              >
+            </v-btn>
           </div>
         </div>
 
@@ -203,6 +215,11 @@
               >Carrinho</span
             >
           </a>
+          <v-btn class="btn-2 background-hover" @click="logout">
+            <span class="text-body-medium text-body-medium tw-text-black-light"
+              >Sair</span
+            >
+          </v-btn>
         </div>
         <div
           v-if="isUser && isAdmin"
@@ -227,6 +244,11 @@
               >Usuários</span
             >
           </a>
+          <v-btn class="btn-2 background-hover" @click="logout">
+            <span class="text-body-medium text-body-medium tw-text-black-light"
+              >Sair</span
+            >
+          </v-btn>
         </div>
       </nav>
     </div>
@@ -271,6 +293,10 @@ export default {
     },
     btn3() {
       this.showSecondNavbar()
+    },
+    logout() {
+      localStorage.setItem('user', JSON.stringify({}))
+      window.location.reload(true)
     },
   },
 }
