@@ -44,9 +44,7 @@ export default {
   },
   data: () => ({}),
   methods: {
-    addAddress() {
-      console.log(this.address)
-    },
+    addAddress() {},
   },
 }
 </script>

@@ -25,7 +25,7 @@
     ></v-switch>
 
     <v-card-actions>
-      <v-btn outlined rounded text> Excluir </v-btn>
+      <v-btn outlined rounded text @click="excludeItem"> Excluir </v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -41,6 +41,33 @@ export default {
   data: () => ({
     packaging: false,
   }),
+  methods: {
+    excludeItem() {
+      const items = localStorage.getItem('cart')
+        ? JSON.parse(localStorage.getItem('cart'))
+        : []
+
+      const data = []
+      let exlude = false
+
+      for (const i of items) {
+        if (
+          !exlude &&
+          i.id === this.item.id &&
+          i.color === this.item.color &&
+          i.size === this.item.size &&
+          i.amount === this.item.amount
+        ) {
+          exlude = true
+        } else {
+          data.push(i)
+        }
+      }
+
+      localStorage.setItem('cart', JSON.stringify(data))
+      window.location.reload(true)
+    },
+  },
 }
 </script>
 
