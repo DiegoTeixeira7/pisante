@@ -7,27 +7,11 @@
           R${{ item.price ? item.price : '0,00' }}
         </v-list-item-title>
         <v-list-item-subtitle>
-          <span
-            ><b>Tamanho:</b>
-            {{
-              item.model && item.model.inventory && item.model.inventory.size
-                ? item.model.inventory.size
-                : ''
-            }}</span
-          >
+          <span><b>Tamanho:</b> {{ item.size ? item.size : '' }}</span>
           <br />
-          <span
-            ><b>Cor:</b>
-            {{
-              item.model && item.model.inventory && item.model.inventory.color
-                ? item.model.inventory.color
-                : ''
-            }}</span
-          >
+          <span><b>Cor:</b> {{ item.color ? item.color : '' }}</span>
           <br />
-          <span
-            ><b>Quantidade:</b> {{ item.quantity ? item.quantity : 1 }}</span
-          >
+          <span><b>Quantidade:</b> {{ item.amount ? item.amount : 1 }}</span>
           <br />
         </v-list-item-subtitle>
       </v-list-item-content>

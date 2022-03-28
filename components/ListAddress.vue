@@ -27,7 +27,9 @@
     </v-list-item>
 
     <v-card-actions>
-      <v-btn outlined rounded text> Adicionar outro endereço </v-btn>
+      <v-btn outlined rounded text @click="addAddress">
+        Adicionar outro endereço
+      </v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -41,6 +43,11 @@ export default {
     },
   },
   data: () => ({}),
+  methods: {
+    addAddress() {
+      console.log(this.address)
+    },
+  },
 }
 </script>
 

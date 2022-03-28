@@ -13,7 +13,7 @@
     </div>
 
     <div class="lg:tw-ml-10 tw-mt-4">
-      <Address :address="address" />
+      <list-address :address="address" />
     </div>
 
     <div class="tw-mt-4 lg:tw-ml-10 tw-flex tw-flex-justify-items-center">
@@ -26,72 +26,18 @@
 export default {
   data: () => ({
     page: 1,
-    items: [
-      {
-        title: 'Produto 1',
-        slug: '/produto-1',
-        price: 122.33,
-        quantity: 1,
-        model: {
-          brand: 'Nike',
-          material: 'Couro',
-          intendedAudience: 'Masculino',
-          closure: 'Cadarço',
-          isShockAbsorbers: true,
-          isAntiOdourInsole: true,
-          inventory: {
-            size: 38,
-            color: 'Azul',
-          },
-        },
-      },
-      {
-        title: 'Produto 2',
-        slug: '/produto-2',
-        price: 162.33,
-        quantity: 2,
-        model: {
-          brand: 'Nike',
-          material: 'Couro',
-          intendedAudience: 'Masculino',
-          closure: 'Cadarço',
-          isShockAbsorbers: true,
-          isAntiOdourInsole: true,
-          inventory: {
-            size: 38,
-            color: 'Azul',
-          },
-        },
-      },
-      {
-        title: 'Produto 3',
-        slug: '/produto-3',
-        price: 112.13,
-        quantity: 1,
-        model: {
-          brand: 'Nike',
-          material: 'Couro',
-          intendedAudience: 'Masculino',
-          closure: 'Cadarço',
-          isShockAbsorbers: true,
-          isAntiOdourInsole: true,
-          inventory: {
-            size: 40,
-            color: 'Branco',
-          },
-        },
-      },
-    ],
-    address: {
-      street: 'Rua 1',
-      city: 'Viçosa',
-      state: 'Minas Gerais',
-      cep: '36570-000',
-      country: 'Brasil',
-      number: 12,
-      neighborhood: 'Centro',
-    },
+    items: [],
+    address: {},
   }),
+  mounted() {
+    this.items = localStorage.getItem('cart')
+      ? JSON.parse(localStorage.getItem('cart'))
+      : []
+
+    this.address = localStorage.getItem('user')
+      ? JSON.parse(localStorage.getItem('user'))
+      : {}
+  },
 }
 </script>
 <style>
