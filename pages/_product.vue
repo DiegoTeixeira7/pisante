@@ -52,14 +52,18 @@
             <span
               ><b>Amortecedores:</b>
               {{
-                item && item.is_shock_absorbers ? 'Possui' : 'Não possui'
+                item && item.is_shock_absorbers === 't'
+                  ? 'Possui'
+                  : 'Não possui'
               }}</span
             >
             <br />
             <span
               ><b>Palmilha anti-odor:</b>
               {{
-                item && item.is_anti_odour_insole ? 'Possui' : 'Não possui'
+                item && item.is_anti_odour_insole === 't'
+                  ? 'Possui'
+                  : 'Não possui'
               }}</span
             >
           </div>

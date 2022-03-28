@@ -48,17 +48,17 @@ export default {
         : []
 
       const data = []
-      let exlude = false
+      let exclude = false
 
       for (const i of items) {
         if (
-          !exlude &&
+          !exclude &&
           i.id === this.item.id &&
           i.color === this.item.color &&
           i.size === this.item.size &&
           i.amount === this.item.amount
         ) {
-          exlude = true
+          exclude = true
         } else {
           data.push(i)
         }
