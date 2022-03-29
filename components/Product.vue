@@ -179,12 +179,12 @@ export default {
       this.product_curr.price = parseInt(this.product_curr.price)
       this.product_curr.is_shock_absorbers = this.product_curr
         .is_shock_absorbers
-        ? 't'
-        : 'f'
+        ? 1
+        : 0
       this.product_curr.is_anti_odour_insole = this.product_curr
         .is_anti_odour_insole
-        ? 't'
-        : 'f'
+        ? 1
+        : 0
 
       const formData = new FormData()
 
@@ -202,7 +202,6 @@ export default {
 
           if (data && data.id) {
             this.isEditProduct = false
-            window.location.reload(true)
           }
         })
         .catch()
