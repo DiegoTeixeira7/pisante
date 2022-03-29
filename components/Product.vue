@@ -202,6 +202,7 @@ export default {
 
           if (data && data.id) {
             this.isEditProduct = false
+            window.location.reload(true)
           }
         })
         .catch()

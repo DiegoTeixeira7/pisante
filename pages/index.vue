@@ -8,7 +8,7 @@
         Adicionar produto
       </v-btn>
     </div>
-    <div v-else>
+    <div v-if="user && user.role === 'admin' && isAddProduct">
       <div class="tw-container tw-flex tw-flex-col">
         <div class="tw-flex tw-flex-col lg:tw-flex-row tw-gap-x-4">
           <v-text-field
